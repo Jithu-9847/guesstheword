@@ -1,0 +1,254 @@
+body{
+    background-color: aqua;
+     font-family: cursive;
+}
+
+ 
+
+#con{
+     width: 600px;
+     height: 600px;
+     background-color: rgb(255, 255, 255);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 10%;
+      padding: 20px;
+
+}
+nav{
+    height: 50px;
+    background-color: blue;
+}
+span{
+    position: absolute;
+     height: 100px;
+     width: 94%;
+    border: 5px solid black;
+    left: 50%;
+      transform: translateX(-50%);
+      font-size: 55px;
+      text-align: center;
+}
+
+#play{
+        position:  absolute;
+        left: 15px;
+        width: 170px;
+        height: 75%;
+        position: absolute;
+        border: 5px solid black;
+        top: 22%;
+}
+#input{
+    position: absolute;
+   height: 50px;
+    width: 40%;
+    bottom:  20px;
+    left: 49%;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+#report{
+    position: absolute;
+    color: red;
+    font-weight: bolder;
+     border-radius: 5px;
+    bottom:  35px;
+    left: 35%;
+    font-family: cursive;
+}
+ 
+#enter_btn{
+    position: absolute;
+    
+     width: 50px;
+    bottom:  20px;
+     right: 10px;
+}
+
+#timer{
+    position: absolute;
+    width: 130px;
+    height: 50px;
+    left: 33%;
+    top: 22%;
+    border: 5px groove black;
+    font-size: 40px;
+    font-weight: bolder;
+     text-align: center;
+}
+
+#name{
+    position: absolute;
+    left: 43%;
+    top: 50%;
+    font-weight: bolder;
+     
+}
+#name_btn{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-weight: bolder;
+     text-align: center;
+     font-size: 45px;
+     font-family: cursive;
+     border-radius: 20px;
+     
+}
+#players{
+    text-align: center;
+    border: 2px solid black;
+}
+
+#host_in{
+
+    position: absolute;
+    height: 100px;
+    width: 94%;
+   font-size:55px;
+   left: 50%;
+   border: 0px;
+     transform: translateX(-50%);
+     text-align: center;
+     outline: none;
+     display: none;
+     font-family: cursive;
+}
+.op{
+
+    position:relative;
+    margin-left: 20px;
+    top: 60%;
+    left: 40%;
+    font-size: 25px;
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+/* ---------------------media query------------------------------- */
+@media only screen and (max-width: 600px) {
+    span{
+        width: 85%;
+    }
+
+    #play{
+        width: 140px;
+        left: 7%;
+    }
+    #report{
+        left: 32%;
+    }
+    #input{
+        left: 45%;
+    }
+    #enter_btn{
+        right: 40px;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    span{
+        width: 60%;
+    }
+
+    #play{
+        width: 120px;
+        left: 19.5%;
+        height: 65%;
+    }
+    #report{
+        left: 25%;
+    }
+    #input{
+        left: 43%;
+        width: 30%;
+    }
+    #enter_btn{
+        right: 100px;
+    }
+
+    #timer{
+        left: 58.5%;
+    }
+  }
+  @media only screen and (max-width: 400px) {
+    span{
+        width: 50%;
+    }
+
+    #play{
+        width: 120px;
+        left: 24.5%;
+        height: 60%;
+    }
+    #report{
+        bottom: 80px;
+        left: 25%;
+        width: 120px;
+    }
+    #input{
+        left: 25%;
+        width: 40%;
+    }
+    #enter_btn{
+        right: 160px;
+    }
+
+    #timer{
+        left: 53.7%;
+    }
+
+    #name{
+        width: 120px;
+        left: 53%;
+        
+        
+         
+    }
+    #name_btn{
+        left: 46%;
+        
+    }
+
+
+  }
+  @media only screen and (max-width: 300px) {
+    span{
+        width: 40%;
+    }
+
+    #play{
+        width: 120px;
+        left: 29%;
+        height: 60%;
+    }
+    #report{
+        bottom: 80px;
+        left: 29%;
+        width: 120px;
+    }
+    #input{
+        left: 29%;
+        width: 33%;
+    }
+    #enter_btn{
+        right: 180px;
+    }
+
+    #timer{
+        left: 53%;
+        width: 100px;
+    }
+  }
+
+   

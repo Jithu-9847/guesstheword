@@ -1,0 +1,399 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
+<head>
+    <title>
+
+    </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main>
+
+        <nav>
+
+        </nav>
+
+        <div id="con">
+            <span id="game_in">
+
+            </span>
+            <input type="text" name="" id="host_in">
+            <div id="play">
+
+                <p id="players"></p>
+
+
+
+            </div>
+            <div id="timer">
+                20
+            </div>
+
+            <button id="op1" class="op">option1</button>
+            <button id="op2" class="op">option2</button>
+            <button id="op3" class="op">option3</button>
+
+            <button id="name_btn">Join</button>
+            <button id="report">
+                REPORT
+            </button>
+            <input type="text" name="" id="input">
+            <img src="send.svg" alt="" id="enter_btn">
+
+        </div>
+
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+            import { getDatabase, set, ref, child, update, remove, push, get, onChildAdded, onChildChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+            const firebaseConfig = {
+                apiKey: "AIzaSyDL9A8HxzLn7utu3l38Y2xnX4svZQPNPC8",
+                authDomain: "guesstheword-37884.firebaseapp.com",
+                databaseURL: "https://guesstheword-37884-default-rtdb.firebaseio.com",
+                projectId: "guesstheword-37884",
+                storageBucket: "guesstheword-37884.appspot.com",
+                messagingSenderId: "401092987372",
+                appId: "1:401092987372:web:00119654dfae7542cf18c9"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            var db = getDatabase();
+
+            const dbref = ref(db);
+            let users;
+            let check = 0;
+            let words = ["apple", "banana", "cat", "cat fish", "dog", "elephant", "fish", "giraffe", "horse ride", "igloo", "jellyfish", "kangaroo", "lion king", "monkey", "AI", "octopus", "ringtone", "calling bell", "rhinoceros", "snake", "tiger fish", "umbrella", "van", "fly wheel", "x-ray machine", "sun set",
+                "zebra", "aeroplane", "bicycle", "bus", "car", "delivery truck", "excavator", "fire engine", "garbage truck", "helicopter", "ice cream truck", "jet ski", "kayak", "locomotive", "motorcycle", "oil tanker", "police car", "quad bike", "racing car", "school bus", "speedboat", "street sweeper", "submarine",
+                "tractor", "unicycle", "van", "water taxi", "wheelbarrow", "yacht", "zeppelin", "apple", "banana", "cherry", "orange", "pear", "strawberry", "watermelon",
+                "baseball", "basketball", "football", "soccer", "tennis", "volleyball",
+                "blue", "green", "orange", "pink", "purple", "red", "yellow",
+                "car", "house", "plane", "ship", "train",
+                "cat", "dog", "elephant", "fish", "giraffe", "hippopotamus", "lion", "monkey", "mouse", "panda", "tiger",
+                "child", "father", "grandfather", "grandmother", "mother",
+                "city", "country", "desert", "forest", "mountain", "ocean", "river", "sea",
+                "cloud", "rain", "snow", "sun", "wind",
+                "day", "night", "morning", "afternoon", "evening",
+                "eat", "drink", "sleep", "walk", "run",
+                "happy", "sad", "angry", "excited", "tired",
+                "big", "small", "long", "short", "tall", "short",
+                "hot", "cold", "wet", "dry",
+                "light", "dark",
+                "up", "down", "left", "right"];
+
+            let rand;
+            window.onload = () => {
+
+                rand = 0;
+                set(ref(db, "number"),
+                    {
+                        no: rand
+
+                    })
+
+                set(ref(db, "Users/" + localStorage.getItem('user')),
+                    {
+                        score: 0
+
+                    })
+                    remove(ref(db, "Users/" + localStorage.getItem('user')),
+                    {
+                         
+
+                    })
+
+
+
+            }
+            console.log(localStorage.getItem('user'));
+
+
+            var user1;
+            let values;
+            var time = 30;
+
+            document.getElementById('name_btn').addEventListener('click', () => {
+
+
+
+                document.getElementById('name_btn').style.display = "none";
+                if (localStorage.getItem('user')) {
+
+                }
+                else {
+                    var d = new Date();
+                    var uid = "uid" + d.getTime().toString();
+                    localStorage.setItem('user', uid);
+                    host = localStorage.getItem('user');
+                    console.log(uid);
+                    console.log(host);
+                }
+
+
+
+                set(ref(db, "Users/" + localStorage.getItem('user')),
+                    {
+                        score: 0
+
+                    }).then(() => {
+
+
+
+
+
+
+
+
+                    })
+
+            })
+
+            let it;
+            let player_score = 0;
+            let add;
+            let user_score;
+            document.getElementById('enter_btn').addEventListener('click', () => {
+
+
+                if (values == document.getElementById('input').value) {
+                    add = parseInt(document.getElementById('timer').innerText);
+                    player_score = player_score + add;
+                    alert("Your Answer is correct");
+
+                    set(ref(db, "Users/" + localStorage.getItem('user')),
+                        {
+                            score: player_score
+
+                        })
+
+
+                        get(child(dbref, 'Users/'+ localStorage.getItem('user'))).then((snapshot) => {
+                    user_score = Object.values(snapshot.val());
+                        })
+                }
+
+
+
+            })
+
+
+
+            // ------------------------user add check
+            let no;
+            let final_score = [];
+
+            onChildAdded(ref(db, 'Users'), (data) => {
+
+
+                get(child(dbref, 'Users')).then((snapshot) => {
+                    users = Object.keys(snapshot.val());
+                    console.log(users);
+
+
+                    let i;
+
+
+
+                    if (users.length == 5 && rand < users.length) {
+
+                        console.log(rand);
+                        if (users[rand] == localStorage.getItem('user')) {
+                            play();
+
+
+
+                        }
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+                })
+
+
+            });
+            document.getElementById("op1").addEventListener("click", () => {
+
+                set(ref(db, "word"),
+                    {
+                        word: document.getElementById("op1").innerText
+
+                    }).then(() => {
+
+                        document.getElementById("op1").style.display = "none";
+                        document.getElementById("op2").style.display = "none";
+                        document.getElementById("op3").style.display = "none";
+                        time = 30;
+                    })
+
+            })
+            document.getElementById("op2").addEventListener("click", () => {
+
+                set(ref(db, "word"),
+                    {
+                        word: document.getElementById("op2").innerText
+
+                    }).then(() => {
+
+                        document.getElementById("op1").style.display = "none";
+                        document.getElementById("op2").style.display = "none";
+                        document.getElementById("op3").style.display = "none";
+                        time = 30;
+                    })
+
+            })
+            document.getElementById("op3").addEventListener("click", () => {
+
+                set(ref(db, "word"),
+                    {
+                        word: document.getElementById("op3").innerText
+
+                    }).then(() => {
+
+                        document.getElementById("op1").style.display = "none";
+                        document.getElementById("op2").style.display = "none";
+                        document.getElementById("op3").style.display = "none";
+                        time = 30;
+                    })
+
+            })
+
+            let x;
+            let y;
+
+            onChildChanged(ref(db, 'number'), (data) => {
+
+                let inputs;
+                 
+                if(rand==5)
+                {
+
+                    alert("your final score"+user_score);
+                     
+                }
+
+
+               
+            })
+            onChildChanged(ref(db, 'hostinput'), (data) => {
+
+                let inputs;
+                get(child(dbref, 'hostinput')).then((snapshot) => {
+                    inputs = Object.values(snapshot.val());
+                    console.log(inputs);
+
+                    document.getElementById('game_in').innerText = inputs[0];
+
+
+                })
+            })
+            onChildChanged(ref(db, 'word'), (data) => {
+                get(child(dbref, 'word')).then((snapshot) => {
+                    values = Object.values(snapshot.val());
+                })
+                if (users[rand] != localStorage.getItem('user'))
+                    time = 30;
+
+                const timer = setInterval(() => {
+                    document.getElementById("timer").innerText = time;
+
+                    if (time != 0)
+                        time = time - 1;
+                }, 1000);
+
+
+                setTimeout(() => {
+
+                    remove(ref(db, "values"),
+                        {
+
+
+                        })
+                    rand = rand + 1;
+                    set(ref(db, "number"),
+                        {
+                            no: rand
+
+                        })
+                        document.getElementById("host_in").style.display = "none";
+                }, 30000);
+
+                setTimeout(() => {
+                    clearInterval(timer);
+                     
+
+                    play();
+
+
+                }, 35000);
+
+
+
+            })
+
+
+
+
+            function play() {
+
+
+                if (users[rand] == localStorage.getItem('user')) {
+                    let randomNumber = Math.floor(Math.random() * 150) + 0;
+
+
+                    document.getElementById("host_in").style.display = "block";
+                    document.getElementById('op1').style.display = "block";
+                    document.getElementById('op3').style.display = "block";
+                    document.getElementById('op2').style.display = "block";
+                    document.getElementById('op1').innerText = words[randomNumber];
+                    document.getElementById('op2').innerText = words[randomNumber - 2];
+                    document.getElementById('op3').innerText = words[randomNumber + 20];
+
+                }
+            }
+
+            // set(ref(db, "values/" + cat[b]),
+            //     {
+            //         test: 0
+
+            //     })
+
+            //  ------------------------------------------host input----------------
+
+
+            document.getElementById('host_in').addEventListener('keyup', () => {
+                setTimeout(() => {
+                    set(ref(db, "hostinput"),
+                        {
+                            test: document.getElementById('host_in').value
+
+                        })
+                }, 2000);
+
+
+            })
+
+
+
+        </script>
+
+    </main>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
