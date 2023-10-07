@@ -30,7 +30,7 @@
 
             </div>
             <div id="timer">
-                20
+                60
             </div>
 
             <button id="op1" class="op">option1</button>
@@ -126,11 +126,7 @@
 
                     })
 
-                set(ref(db, "Users/" + localStorage.getItem('user')),
-                    {
-                        score: 0
-
-                    })
+                
 
 
 
@@ -311,7 +307,7 @@
                         document.getElementById("op1").style.display = "none";
                         document.getElementById("op2").style.display = "none";
                         document.getElementById("op3").style.display = "none";
-                        time = 30;
+                        time = 60;
                     })
 
             })
@@ -326,7 +322,7 @@
                         document.getElementById("op1").style.display = "none";
                         document.getElementById("op2").style.display = "none";
                         document.getElementById("op3").style.display = "none";
-                        time = 30;
+                        time = 60;
                     })
 
             })
@@ -341,7 +337,7 @@
                         document.getElementById("op1").style.display = "none";
                         document.getElementById("op2").style.display = "none";
                         document.getElementById("op3").style.display = "none";
-                        time = 30;
+                        time = 60;
                     })
 
             })
@@ -379,7 +375,7 @@
                     values = Object.values(snapshot.val());
                 })
                 if (users[rand] != localStorage.getItem('user'))
-                    time = 30;
+                    time = 60;
 
                 const timer = setInterval(() => {
                     document.getElementById("timer").innerText = time;
@@ -403,7 +399,7 @@
 
                         })
                     document.getElementById("host_in").style.display = "none";
-                }, 30000);
+                }, 60000);
 
                 setTimeout(() => {
                     clearInterval(timer);
@@ -412,7 +408,7 @@
                     play();
 
 
-                }, 35000);
+                }, 65000);
 
 
 
