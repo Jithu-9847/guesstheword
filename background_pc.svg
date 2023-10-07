@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="204.26909mm"
+   height="291.41968mm"
+   viewBox="0 0 204.26909 291.41968"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:lockguides="false"
+     showguides="false" />
+  <defs
+     id="defs1">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#packed-circles"
+       preserveAspectRatio="xMidYMid"
+       id="pattern38"
+       patternTransform="scale(10)"
+       x="0"
+       y="0" />
+    <pattern
+       inkscape:collect="always"
+       patternUnits="userSpaceOnUse"
+       width="1"
+       height="1.73205080756"
+       patternTransform="translate(0,0) scale(10,10)"
+       preserveAspectRatio="xMidYMid"
+       style="fill:#3328c9"
+       id="packed-circles"
+       inkscape:stockid="Packed circles"
+       inkscape:label="Packed circles"
+       inkscape:isstock="true">
+      <circle
+         style="stroke:none"
+         cx="0"
+         cy="0.5"
+         r="0.5"
+         id="circle219" />
+      <circle
+         style="stroke:none"
+         cx="1"
+         cy="0.5"
+         r="0.5"
+         id="circle221" />
+      <circle
+         style="stroke:none"
+         cx="0.5"
+         cy="1.36602540378"
+         r="0.5"
+         id="circle223" />
+      <circle
+         style="stroke:none"
+         cx="0.5"
+         cy="-0.366025403784"
+         r="0.5"
+         id="circle225" />
+    </pattern>
+    <rect
+       x="625.54828"
+       y="205.14517"
+       width="368.3945"
+       height="416.06906"
+       id="rect21" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#TableCloth"
+       preserveAspectRatio="xMidYMid"
+       id="pattern19"
+       patternTransform="scale(1)"
+       x="0"
+       y="0" />
+    <pattern
+       patternUnits="userSpaceOnUse"
+       preserveAspectRatio="xMidYMid"
+       width="50"
+       height="50"
+       id="TableCloth"
+       inkscape:stockid="Table Cloth"
+       style="fill:none"
+       inkscape:collect="always"
+       inkscape:isstock="true"
+       inkscape:label="Table Cloth">&#10;      <g
+   id="g152475">&#10;        <rect
+   style="fill:none;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none"
+   id="rect152346"
+   width="50"
+   height="50"
+   x="0"
+   y="0" />
+&#10;        <path
+   id="path152348"
+   style="fill:#afecda;fill-opacity:1;stroke:none;stroke-width:0.999995;stroke-dasharray:none"
+   d="m 0.5,25.5 v 22 l 2,2 h 22 v -19 l -5,-5 z" />
+&#10;        <path
+   id="path152350"
+   style="fill:#a8cbfe;fill-opacity:1;stroke:none;stroke-width:0.999995;stroke-dasharray:none"
+   d="m 30.5,25.5 -5,5 v 19 h 22 l 2,-2 v -22 z" />
+&#10;        <path
+   id="path152352"
+   style="fill:#cbbbe9;fill-opacity:1;stroke:none;stroke-width:0.999995;stroke-dasharray:none"
+   d="m 25.5,0.5 v 19 l 5,5 h 19 v -22 l -2,-2 z" />
+&#10;        <path
+   id="path152354"
+   style="fill:#f0b6d3;fill-opacity:1;stroke:none;stroke-width:0.999995;stroke-dasharray:none"
+   d="m 2.5,0.5 -2,2 v 22 h 19 l 5,-5 v -19 z" />
+&#10;        <path
+   id="path152356"
+   style="fill:#ffe9a6;stroke-width:1"
+   d="m 17.5,37.5 c 0,2.761423 -2.238577,5 -5,5 -2.7614235,0 -5,-2.238577 -5,-5 0,-2.761424 2.2385765,-5 5,-5 2.761423,0 5,2.238576 5,5 z m 2.5,0 C 20,33.345004 16.654996,30 12.5,30 h -12 v 15 h 12 c 4.154996,0 7.5,-3.345004 7.5,-7.5 z"
+   sodipodi:nodetypes="sssssssccss" />
+&#10;        <path
+   id="path152358"
+   style="fill:#ea95bf;stroke-width:1"
+   d="m 42.5,37.5 c 0,2.761423 -2.238577,5 -5,5 -2.761424,0 -5,-2.238577 -5,-5 0,-2.761424 2.238576,-5 5,-5 2.761423,0 5,2.238576 5,5 z M 37.5,30 C 33.345004,30 30,33.345004 30,37.5 v 12 h 15 v -12 C 45,33.345004 41.654996,30 37.5,30 Z"
+   sodipodi:nodetypes="sssssssccss" />
+&#10;        <path
+   id="path152360"
+   style="fill:#81b4fe;stroke-width:1"
+   d="m 12.5,7.5 c 2.77,0 5,2.23 5,5 0,2.77 -2.23,5 -5,5 -2.77,0 -5,-2.23 -5,-5 0,-2.77 2.23,-5 5,-5 z m 0,12.5 C 16.654996,20 20,16.654996 20,12.5 V 0.5 H 5 v 12 c 0,4.154996 3.345004,7.5 7.5,7.5 z"
+   sodipodi:nodetypes="sssssssccss" />
+&#10;        <path
+   id="path152362"
+   style="fill:#8be3c9;stroke-width:1"
+   d="m 42.5,12.5 c 0,2.761423 -2.238577,5 -5,5 -2.761424,0 -5,-2.238577 -5,-5 0,-2.7614235 2.238576,-5 5,-5 2.761423,0 5,2.2385765 5,5 z m -12.5,0 c 0,4.154996 3.345004,7.5 7.5,7.5 h 12 V 5 h -12 C 33.345004,5 30,8.345004 30,12.5 Z"
+   sodipodi:nodetypes="sssssssccss" />
+&#10;        <path
+   style="fill:#81b4fe;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none"
+   d="m 25.5,30.5 h 5 v -5 z"
+   id="path152364"
+   sodipodi:nodetypes="cccc" />
+&#10;        <path
+   style="fill:#67dab8;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none"
+   d="m 24.5,30.5 h -5 v -5 z"
+   id="path152366"
+   sodipodi:nodetypes="cccc" />
+&#10;        <path
+   style="fill:#ea95bf;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none"
+   d="m 24.5,19.5 h -5 v 5 z"
+   id="path152368"
+   sodipodi:nodetypes="cccc" />
+&#10;        <path
+   style="fill:#b49ddf;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none"
+   d="m 25.5,19.5 h 5 v 5 z"
+   id="path152370"
+   sodipodi:nodetypes="cccc" />
+&#10;        <path
+   style="fill:#81b4fe;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none"
+   d="m 49.5,47.5 h -2 v 2 z"
+   id="path153287"
+   sodipodi:nodetypes="cccc" />
+&#10;        <path
+   style="fill:#67dab8;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none"
+   d="m 0.5,47.5 h 2 v 2 z"
+   id="path154015"
+   sodipodi:nodetypes="cccc" />
+&#10;        <path
+   style="fill:#ea95bf;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none"
+   d="m 0.5,2.5 h 2 v -2 z"
+   id="path154155"
+   sodipodi:nodetypes="cccc" />
+&#10;        <path
+   style="fill:#b49ddf;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none"
+   d="m 49.5,2.5 h -2 v -2 z"
+   id="path154226"
+   sodipodi:nodetypes="cccc" />
+&#10;      </g>
+&#10;    </pattern>
+    <linearGradient
+       id="swatch8"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#ffaaaa;stop-opacity:1;"
+         offset="0"
+         id="stop8" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-3.1723924,-2.7901539)">
+    <rect
+       style="opacity:1;fill:url(#pattern19);fill-opacity:1;stroke:none;stroke-width:1.46857;stroke-opacity:1"
+       id="rect1"
+       width="202.80052"
+       height="289.95111"
+       x="4.2889171"
+       y="3.1421995"
+       rx="10.262262"
+       inkscape:highlight-color="#3bee68" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.75291096,1.9042582,-2.2550326,0.63579433,78.65317,-1313.4764)"
+       id="text21"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.5598px;font-family:'Freestyle Script';-inkscape-font-specification:'Freestyle Script, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect21);opacity:0.611374;mix-blend-mode:multiply;fill:url(#pattern38);fill-opacity:1;stroke:none;stroke-width:4.91339"><tspan
+         x="625.54883"
+         y="224.17183"
+         id="tspan1">GUESS THE WORD</tspan></text>
+  </g>
+</svg>

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body background="background_pc.svg">
 
     <main>
 
@@ -20,10 +20,11 @@
             <span id="game_in">
 
             </span>
-            <input type="text" name="" id="host_in">
+            <input type="text" name="" id="host_in" placeholder="Enter Imoji">
+            <h3 id="player_head">Players</h3>
             <div id="play">
 
-                <p id="players"></p>
+                
 
 
 
@@ -37,11 +38,31 @@
             <button id="op3" class="op">option3</button>
 
             <button id="name_btn">Join</button>
+            <input type="text" name="" id="user_name" placeholder="Enter username...">
             <button id="report">
                 REPORT
             </button>
             <input type="text" name="" id="input">
+            <div id="block">
+
+            </div>
+            <img src="happy.gif" alt="" id="exp">
             <img src="send.svg" alt="" id="enter_btn">
+
+        </div>
+
+        <div id="how" class="sub_con">
+
+            <ol>
+                <h1>How to play</h1>
+                <li>Click on the join button,and wait for others to join.</li>
+                <li>Once all plyers are joined,The game wiil automatically starts.</li>
+
+            </ol>
+
+
+        </div>
+
 
         </div>
 
@@ -83,6 +104,19 @@
                 "up", "down", "left", "right"];
 
             let rand;
+            window.addEventListener('offline', updateOnlineStatus);
+
+            function updateOnlineStatus(event) {
+                var condition = navigator.onLine ? "online" : "offline";
+                if (condition == 'offline') {
+                    remove(ref(db, "Users/" + localStorage.getItem('user')),
+                        {
+
+
+                        })
+
+                }
+            }
             window.onload = () => {
 
                 rand = 0;
@@ -97,11 +131,7 @@
                         score: 0
 
                     })
-                    remove(ref(db, "Users/" + localStorage.getItem('user')),
-                    {
-                         
 
-                    })
 
 
 
@@ -113,42 +143,45 @@
             let values;
             var time = 30;
 
+
+            // -----------------------add new player-----------------
             document.getElementById('name_btn').addEventListener('click', () => {
 
 
+                let user_name = document.getElementById('user_name').value;
+                if (user_name != "") {
 
-                document.getElementById('name_btn').style.display = "none";
-                if (localStorage.getItem('user')) {
 
+                    if (localStorage.getItem('user') === user_name) {
+                        document.getElementById('name_btn').style.display = "none";
+                    }
+                    else {
+                        document.getElementById('name_btn').style.display = "none";
+                        localStorage.setItem('user', user_name);
+                        console.log(localStorage.getItem('user'));
+
+                    }
+
+
+
+                    set(ref(db, "Users/" + localStorage.getItem('user')),
+                        {
+                            score: 0
+
+                        }).then(() => {
+
+
+                            document.getElementById('user_name').style.display = "none";
+
+
+
+
+
+                        })
                 }
-                else {
-                    var d = new Date();
-                    var uid = "uid" + d.getTime().toString();
-                    localStorage.setItem('user', uid);
-                    host = localStorage.getItem('user');
-                    console.log(uid);
-                    console.log(host);
-                }
-
-
-
-                set(ref(db, "Users/" + localStorage.getItem('user')),
-                    {
-                        score: 0
-
-                    }).then(() => {
-
-
-
-
-
-
-
-
-                    })
-
             })
 
+            // -----------------------------------answer check------------------
             let it;
             let player_score = 0;
             let add;
@@ -159,23 +192,48 @@
                 if (values == document.getElementById('input').value) {
                     add = parseInt(document.getElementById('timer').innerText);
                     player_score = player_score + add;
-                    alert("Your Answer is correct");
+                    document.getElementById('input').style.color = "rgb(38, 255, 0)";
+                    display("block");
+                    document.getElementById('exp').setAttribute('src', 'happy.gif');
+                    display("exp");
+
+
 
                     set(ref(db, "Users/" + localStorage.getItem('user')),
                         {
                             score: player_score
 
+                        }).then(() => {
+
+                            document.getElementById('input').value = "";
+                            document.getElementById('input').style.color = "black";
+
                         })
 
 
-                        get(child(dbref, 'Users/'+ localStorage.getItem('user'))).then((snapshot) => {
-                    user_score = Object.values(snapshot.val());
-                        })
+                    get(child(dbref, 'Users/' + localStorage.getItem('user'))).then((snapshot) => {
+                        user_score = Object.values(snapshot.val());
+                    })
+                }
+                else {
+
+                    document.getElementById('exp').setAttribute('src', 'sad.gif');
+                    display('exp');
+                    document.getElementById('input').style.color = "red";
+                    setTimeout(() => {
+                        document.getElementById('input').style.color = "black";
+                    }, 1000);
+                    setTimeout(() => {
+                        hide("exp");
+                    }, 4000);
+
                 }
 
 
 
             })
+
+
 
 
 
@@ -190,6 +248,24 @@
                     users = Object.keys(snapshot.val());
                     console.log(users);
 
+                    let j;
+                    const list = document.getElementById("play");
+
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (j = 1; j <= users.length; j++) {
+
+                        const new_play = document.createElement('p');
+
+                        new_play.setAttribute('class', 'players');
+                        new_play.innerText = users[j - 1];
+                        document.getElementById('play').appendChild(new_play);
+                        new_play.style.top = 10 * j + "%";
+
+
+
+                    }
 
                     let i;
 
@@ -276,16 +352,15 @@
             onChildChanged(ref(db, 'number'), (data) => {
 
                 let inputs;
-                 
-                if(rand==5)
-                {
 
-                    alert("your final score"+user_score);
-                     
+                if (rand == 5) {
+
+                    alert("your final score" + user_score);
+
                 }
 
 
-               
+
             })
             onChildChanged(ref(db, 'hostinput'), (data) => {
 
@@ -327,12 +402,12 @@
                             no: rand
 
                         })
-                        document.getElementById("host_in").style.display = "none";
+                    document.getElementById("host_in").style.display = "none";
                 }, 30000);
 
                 setTimeout(() => {
                     clearInterval(timer);
-                     
+
 
                     play();
 
@@ -347,13 +422,15 @@
 
 
             function play() {
-
+                hide("block");
+                hide("exp");
 
                 if (users[rand] == localStorage.getItem('user')) {
                     let randomNumber = Math.floor(Math.random() * 150) + 0;
 
 
                     document.getElementById("host_in").style.display = "block";
+
                     document.getElementById('op1').style.display = "block";
                     document.getElementById('op3').style.display = "block";
                     document.getElementById('op2').style.display = "block";
@@ -384,6 +461,28 @@
 
 
             })
+
+
+
+
+
+
+            // ----------------------display/hide function area--------------
+
+
+            function display(id) {
+
+                document.getElementById(id).style.display = "block";
+
+
+            }
+
+            function hide(id) {
+
+                document.getElementById(id).style.display = "none";
+
+
+            }
 
 
 

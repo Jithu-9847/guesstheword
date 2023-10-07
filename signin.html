@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>
+    <link rel="stylesheet" href="challenge.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Oswald:wght@200&display=swap"
+        rel="stylesheet">
+</head>
+
+<body id="body">
+    <div id="login" class="card">
+        <h1>Glad to see you again</h1>
+        <input type="text" name="" id="log_input" class="input"><br>
+        <button id="login_btn">Login</button><br>
+        <p id="ms">Don't hava an account/</p>
+        <p id="create">Create now</p>
+    </div>
+    <div id="sign" class="card">
+        <h1>Let's Get Started</h1>
+        <input type="text" name="" id="sign_input" class="input"><br>
+        <button id="sign_btn">Sign in</button>
+    </div>
+
+    <div id="pop">
+        <img src="processing-circle.gif" alt="" id="img">
+        <p id="pop_ms">creating</p>
+    </div>
+
+
+
+
+
+
+    <script src="card.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+
+        import { getDatabase, set, ref, child, update, remove, push, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCn_DEtgiPyQmCbE19XoixKc0_Jqs_At9E",
+            authDomain: "click2break-74277.firebaseapp.com",
+            projectId: "click2break-74277",
+            storageBucket: "click2break-74277.appspot.com",
+            messagingSenderId: "863055107462",
+            appId: "1:863055107462:web:c48932031de7b372994807"
+        };
+        var user;
+        const app = initializeApp(firebaseConfig);
+        var db = getDatabase();
+        console.log(db);
+        const dbref = ref(db);
+
+
+        get(child(dbref, 'Users')).then((snapshot) => {
+            user = Object.keys(snapshot.val());
+             
+             
+
+        })
+
+        document.getElementById('login_btn').addEventListener("click", () => {
+            var input;
+            input = document.getElementById('log_input').value;
+
+            var i;
+            for (i = 0; i < user.length; i++) {
+
+                if( input == user[i]) {
+
+
+                    localStorage.setItem('user', input);
+                    let user1 = localStorage.getItem('input');
+
+                    location.replace("multi_challenge.html");
+                    break;
+                }
+                 
+                if (i+1 == user.length)
+                 { alert("User not fount");
+                
+                }
+            }
+
+
+        })
+        document.getElementById('sign_btn').addEventListener("click", () => {
+            let new_user;
+            new_user = document.getElementById('sign_input').value;
+            document.getElementById('pop').style.display = "block";
+
+            document.getElementById('pop_ms').innerText = "Creating";
+
+
+
+            set(ref(db, "Users/" + new_user),
+                {
+                    score: 0
+
+                }).then(() => {
+
+                    document.getElementById('img').setAttribute('src', 'successfully-done.gif');
+                    document.getElementById('pop_ms').innerText = "Created Successfully";
+                    setTimeout(() => {
+                        document.getElementById('pop').style.display = "none";
+                        document.getElementById('img').setAttribute('src', 'processing-circle.gif');
+                        document.getElementById('process').innerText = "";
+
+
+                    }, 3000);
+
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2999);
+                })
+
+        })
+
+
+    </script>
+</body>
+
+</html>
