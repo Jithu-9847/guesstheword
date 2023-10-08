@@ -3,7 +3,7 @@
 
 <head>
     <title>
-
+        Guess The Word
     </title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,7 +13,7 @@
     <main>
 
         <nav>
-
+<h1 style="font-weight: bolder; color: rgb(25, 0, 255); font-size: 35px;">Guess The Word</h1>
         </nav>
 
         <div id="con">
@@ -24,13 +24,13 @@
             <h3 id="player_head">Players</h3>
             <div id="play">
 
-                
+
 
 
 
             </div>
             <div id="timer">
-                60
+               100
             </div>
 
             <button id="op1" class="op">option1</button>
@@ -38,6 +38,8 @@
             <button id="op3" class="op">option3</button>
 
             <button id="name_btn">Join</button>
+            <img src="waiting.gif" alt="" id="waiting">
+            <p id="waiting_play">waiting for 5 players..</p>
             <input type="text" name="" id="user_name" placeholder="Enter username...">
             <button id="report">
                 REPORT
@@ -48,7 +50,15 @@
             </div>
             <img src="happy.gif" alt="" id="exp">
             <img src="send.svg" alt="" id="enter_btn">
-
+            <div id="pop_up">
+                <h1 id="pop_head">The Game Starts in ...</h1>
+                <img src="countdown2.gif" alt="" id="countdown">
+            </div>
+            <div id="winner">
+                <h1 id="congrats">Congragulations</h1>
+                <img src="winner1.gif" alt="" id="win_gif">
+                <h1 id="winner_name"></h1>
+            </div>
         </div>
 
         <div id="how" class="sub_con">
@@ -104,19 +114,19 @@
                 "up", "down", "left", "right"];
 
             let rand;
-            window.addEventListener('offline', updateOnlineStatus);
+            // window.addEventListener('offline', updateOnlineStatus);
 
-            function updateOnlineStatus(event) {
-                var condition = navigator.onLine ? "online" : "offline";
-                if (condition == 'offline') {
-                    remove(ref(db, "Users/" + localStorage.getItem('user')),
-                        {
+            // function updateOnlineStatus(event) {
+            //     var condition = navigator.onLine ? "online" : "offline";
+            //     if (condition == 'offline') {
+            //         remove(ref(db, "Users/" + localStorage.getItem('user')),
+            //             {
 
 
-                        })
+            //             })
 
-                }
-            }
+            //     }
+            // }
             window.onload = () => {
 
                 rand = 0;
@@ -126,18 +136,26 @@
 
                     })
 
-                
+                    
+
+                document.onvisibilitychange = function () {
+                    if (document.visibilityState === 'hidden') {
+                        remove(ref(db, "Users/" + localStorage.getItem('user')),
+                            {
 
 
+                            })
+                    }
+                };
 
 
             }
-            console.log(localStorage.getItem('user'));
+            
 
 
             var user1;
             let values;
-            var time = 60;
+            var time =100;
 
 
             // -----------------------add new player-----------------
@@ -145,36 +163,78 @@
 
 
                 let user_name = document.getElementById('user_name').value;
-                if (user_name != "") {
+                display("waiting");
+                display("waiting_play");
 
+                if (localStorage.getItem('user')) {
 
-                    if (localStorage.getItem('user') === user_name) {
+                    if (localStorage.getItem('user').substring(0, 3) != "uid") {
                         document.getElementById('name_btn').style.display = "none";
+                        set(ref(db, "Users/" + localStorage.getItem('user')),
+                            {
+                                score: 0
+
+                            }).then(() => {
+
+                                set(ref(db, "scores"),
+                            {
+                                  
+
+                            })
+
+                                
+                                document.getElementById('user_name').style.display = "none";
+
+
+
+
+
+                            })
                     }
+
                     else {
-                        document.getElementById('name_btn').style.display = "none";
-                        localStorage.setItem('user', user_name);
-                        console.log(localStorage.getItem('user'));
+                        display("user_name");
 
+
+                        if (user_name) {
+                            localStorage.setItem('user', user_name);
+                            
+                            set(ref(db, "Users/" + localStorage.getItem('user')),
+                                {
+                                    score: 0
+
+                                }).then(() => {
+
+
+                                    document.getElementById('user_name').style.display = "none";
+                                    hide("name_btn");
+                                })
+                        }
                     }
 
 
 
-                    set(ref(db, "Users/" + localStorage.getItem('user')),
-                        {
-                            score: 0
-
-                        }).then(() => {
-
-
-                            document.getElementById('user_name').style.display = "none";
-
-
-
-
-
-                        })
                 }
+                else {
+                    display("user_name");
+
+
+                    if (user_name) {
+                        localStorage.setItem('user', user_name);
+                        
+                        set(ref(db, "Users/" + localStorage.getItem('user')),
+                            {
+                                score: 0
+
+                            }).then(() => {
+
+
+                                document.getElementById('user_name').style.display = "none";
+                                hide("name_btn");
+                            })
+                    }
+                }
+
             })
 
             // -----------------------------------answer check------------------
@@ -242,15 +302,20 @@
 
                 get(child(dbref, 'Users')).then((snapshot) => {
                     users = Object.keys(snapshot.val());
-                    console.log(users);
-
+                    
+                    document.getElementById('waiting_play').innerText="waiting for "+(5-users.length)+" players..";
                     let j;
                     const list = document.getElementById("play");
 
                     while (list.hasChildNodes()) {
                         list.removeChild(list.firstChild);
                     }
+
+
+
                     for (j = 1; j <= users.length; j++) {
+
+
 
                         const new_play = document.createElement('p');
 
@@ -269,13 +334,17 @@
 
                     if (users.length == 5 && rand < users.length) {
 
-                        console.log(rand);
-                        if (users[rand] == localStorage.getItem('user')) {
-                            play();
 
+                        hide("waiting");
+                        hide("waiting_play");
+                        display("pop_up");
+                        setTimeout(() => {
+                            
+                            if (users[rand] == localStorage.getItem('user'))
+                                play();
 
-
-                        }
+                            hide("pop_up");
+                        },10000);
 
 
 
@@ -284,6 +353,7 @@
 
 
                     }
+
 
 
 
@@ -307,7 +377,7 @@
                         document.getElementById("op1").style.display = "none";
                         document.getElementById("op2").style.display = "none";
                         document.getElementById("op3").style.display = "none";
-                        time = 60;
+                        time =100;
                     })
 
             })
@@ -322,7 +392,7 @@
                         document.getElementById("op1").style.display = "none";
                         document.getElementById("op2").style.display = "none";
                         document.getElementById("op3").style.display = "none";
-                        time = 60;
+                        time =100;
                     })
 
             })
@@ -337,45 +407,102 @@
                         document.getElementById("op1").style.display = "none";
                         document.getElementById("op2").style.display = "none";
                         document.getElementById("op3").style.display = "none";
-                        time = 60;
+                        time =100;
                     })
 
             })
 
             let x;
             let y;
-
+            let k;
+            let play_scores = [];
             onChildChanged(ref(db, 'number'), (data) => {
 
-                let inputs;
+                 
+                
+                
+                   
+                 
+                
 
                 if (rand == 5) {
+                    let scores;
+                    let one_score;
+                    let large=0;
+                    let index;
+                    get(child(dbref, 'Users')).then((snapshot) => {
+                    scores = Object.values(snapshot.val());
+                    
+                    })
+                    setTimeout(() => {
+                        for(k=0;k<scores.length;k++)
+                    {
+                        one_score=Object.values(scores[k])
+                         if(one_score[0]>large)
+                         {
 
-                    alert("your final score" + user_score);
+                            large=one_score[0];
+                            index=k;
+                         }
+                    }
 
+                    
+                    set(ref(db, "winner"),
+                    {
+                        Name:users[index],
+                        score:large
+
+                    }) 
+                    },  5000);
+                    
+                   
                 }
 
 
 
             })
-            onChildChanged(ref(db, 'hostinput'), (data) => {
 
+            // ------------------------winner check-----------------
+
+            onChildChanged(ref(db, 'winner'), (data) => {
+                let winner;
+                get(child(dbref, 'winner')).then((snapshot) => {
+                    winner = Object.values(snapshot.val());
+                })
+
+                setTimeout(() => {
+                    document.getElementById('winner_name').innerText=winner[0];
+                    display("winner");
+                },  3000);
+
+
+
+            })
+
+
+
+
+            onChildChanged(ref(db, 'hostinput'), (data) => {
+                 
                 let inputs;
                 get(child(dbref, 'hostinput')).then((snapshot) => {
                     inputs = Object.values(snapshot.val());
-                    console.log(inputs);
+                    
 
+ 
                     document.getElementById('game_in').innerText = inputs[0];
 
 
                 })
+
+                 
             })
             onChildChanged(ref(db, 'word'), (data) => {
                 get(child(dbref, 'word')).then((snapshot) => {
                     values = Object.values(snapshot.val());
                 })
                 if (users[rand] != localStorage.getItem('user'))
-                    time = 60;
+                    time =100;
 
                 const timer = setInterval(() => {
                     document.getElementById("timer").innerText = time;
@@ -399,7 +526,7 @@
 
                         })
                     document.getElementById("host_in").style.display = "none";
-                }, 60000);
+                },100000);
 
                 setTimeout(() => {
                     clearInterval(timer);
@@ -408,7 +535,7 @@
                     play();
 
 
-                }, 65000);
+                }, 105000);
 
 
 
