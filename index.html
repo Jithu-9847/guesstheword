@@ -173,7 +173,7 @@
 
                 if (localStorage.getItem('user')) {
 
-                    if (localStorage.getItem('user').substring(0, 3) != "Jit") {
+                    if (localStorage.getItem('user').substring(0, 3) != "uid") {
                         document.getElementById('name_btn').style.display = "none";
 
                         set(ref(db, "Users/" + localStorage.getItem('user')),
