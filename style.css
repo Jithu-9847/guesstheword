@@ -198,6 +198,8 @@ span{
     left: 50%;
     top: 50%;
     display: none;
+     border-top-right-radius: 20px;
+     border-top-left-radius: 20px;
 }
 #waiting_play{
 
@@ -209,6 +211,7 @@ span{
     font-size: 13px;
     font-weight: bold;
     display: none;
+    
 }
 #winner{
     position:absolute ;

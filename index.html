@@ -13,7 +13,7 @@
     <main>
 
         <nav>
-<h1 style="font-weight: bolder; color: rgb(25, 0, 255); font-size: 35px;">Guess The Word</h1>
+            <h1 style="font-weight: bolder; color: rgb(25, 0, 255); font-size: 35px;">Guess The Word</h1>
         </nav>
 
         <div id="con">
@@ -30,7 +30,7 @@
 
             </div>
             <div id="timer">
-               100
+                100
             </div>
 
             <button id="op1" class="op">option1</button>
@@ -136,7 +136,7 @@
 
                     })
 
-                    
+
 
                 document.onvisibilitychange = function () {
                     if (document.visibilityState === 'hidden') {
@@ -150,12 +150,12 @@
 
 
             }
-            
+
 
 
             var user1;
             let values;
-            var time =100;
+            var time = 100;
 
 
             // -----------------------add new player-----------------
@@ -163,13 +163,19 @@
 
 
                 let user_name = document.getElementById('user_name').value;
-                display("waiting");
-                display("waiting_play");
+                if (user_name) {
+                    setTimeout(() => {
+                        display("waiting");
+                        display("waiting_play");
+                    }, 1000);
+
+                }
 
                 if (localStorage.getItem('user')) {
 
                     if (localStorage.getItem('user').substring(0, 3) != "uid") {
                         document.getElementById('name_btn').style.display = "none";
+
                         set(ref(db, "Users/" + localStorage.getItem('user')),
                             {
                                 score: 0
@@ -177,12 +183,14 @@
                             }).then(() => {
 
                                 set(ref(db, "scores"),
-                            {
-                                  
+                                    {
 
-                            })
 
-                                
+                                    })
+                                    console.log("again");
+                                display("waiting");
+                                display("waiting_play");
+
                                 document.getElementById('user_name').style.display = "none";
 
 
@@ -198,7 +206,8 @@
 
                         if (user_name) {
                             localStorage.setItem('user', user_name);
-                            
+
+
                             set(ref(db, "Users/" + localStorage.getItem('user')),
                                 {
                                     score: 0
@@ -207,8 +216,12 @@
 
 
                                     document.getElementById('user_name').style.display = "none";
+
                                     hide("name_btn");
+
                                 })
+
+
                         }
                     }
 
@@ -221,7 +234,7 @@
 
                     if (user_name) {
                         localStorage.setItem('user', user_name);
-                        
+
                         set(ref(db, "Users/" + localStorage.getItem('user')),
                             {
                                 score: 0
@@ -302,8 +315,8 @@
 
                 get(child(dbref, 'Users')).then((snapshot) => {
                     users = Object.keys(snapshot.val());
-                    
-                    document.getElementById('waiting_play').innerText="waiting for "+(5-users.length)+" players..";
+
+                    document.getElementById('waiting_play').innerText = "waiting for " + (5 - users.length) + " players..";
                     let j;
                     const list = document.getElementById("play");
 
@@ -334,20 +347,22 @@
 
                     if (users.length == 5 && rand < users.length) {
 
-
-                        hide("waiting");
-                        hide("waiting_play");
+                        
                         display("pop_up");
+                         
+
                         setTimeout(() => {
-                            
-                            if (users[rand] == localStorage.getItem('user'))
+                            hide("waiting");
+                            hide("waiting_play");
+                            if (users[rand] == localStorage.getItem('user')) {
+
                                 play();
-
+                            }
+                            
                             hide("pop_up");
-                        },10000);
+                        }, 6000);
 
-
-
+                         
 
 
 
@@ -377,7 +392,7 @@
                         document.getElementById("op1").style.display = "none";
                         document.getElementById("op2").style.display = "none";
                         document.getElementById("op3").style.display = "none";
-                        time =100;
+                        time = 100;
                     })
 
             })
@@ -392,7 +407,7 @@
                         document.getElementById("op1").style.display = "none";
                         document.getElementById("op2").style.display = "none";
                         document.getElementById("op3").style.display = "none";
-                        time =100;
+                        time = 100;
                     })
 
             })
@@ -407,7 +422,7 @@
                         document.getElementById("op1").style.display = "none";
                         document.getElementById("op2").style.display = "none";
                         document.getElementById("op3").style.display = "none";
-                        time =100;
+                        time = 100;
                     })
 
             })
@@ -418,44 +433,42 @@
             let play_scores = [];
             onChildChanged(ref(db, 'number'), (data) => {
 
-                 
-                
-                
-                   
-                 
-                
+
+
+
+
+
+
 
                 if (rand == 5) {
                     let scores;
                     let one_score;
-                    let large=0;
+                    let large = 0;
                     let index;
                     get(child(dbref, 'Users')).then((snapshot) => {
-                    scores = Object.values(snapshot.val());
-                    
+                        scores = Object.values(snapshot.val());
+
                     })
                     setTimeout(() => {
-                        for(k=0;k<scores.length;k++)
-                    {
-                        one_score=Object.values(scores[k])
-                         if(one_score[0]>large)
-                         {
+                        for (k = 0; k < scores.length; k++) {
+                            one_score = Object.values(scores[k])
+                            if (one_score[0] > large) {
 
-                            large=one_score[0];
-                            index=k;
-                         }
-                    }
+                                large = one_score[0];
+                                index = k;
+                            }
+                        }
 
-                    
-                    set(ref(db, "winner"),
-                    {
-                        Name:users[index],
-                        score:large
 
-                    }) 
-                    },  5000);
-                    
-                   
+                        set(ref(db, "winner"),
+                            {
+                                Name: users[index],
+                                score: large
+
+                            })
+                    }, 5000);
+
+
                 }
 
 
@@ -471,9 +484,9 @@
                 })
 
                 setTimeout(() => {
-                    document.getElementById('winner_name').innerText=winner[0];
+                    document.getElementById('winner_name').innerText = winner[0];
                     display("winner");
-                },  3000);
+                }, 3000);
 
 
 
@@ -483,26 +496,26 @@
 
 
             onChildChanged(ref(db, 'hostinput'), (data) => {
-                 
+
                 let inputs;
                 get(child(dbref, 'hostinput')).then((snapshot) => {
                     inputs = Object.values(snapshot.val());
-                    
 
- 
+
+
                     document.getElementById('game_in').innerText = inputs[0];
 
 
                 })
 
-                 
+
             })
             onChildChanged(ref(db, 'word'), (data) => {
                 get(child(dbref, 'word')).then((snapshot) => {
                     values = Object.values(snapshot.val());
                 })
                 if (users[rand] != localStorage.getItem('user'))
-                    time =100;
+                    time = 100;
 
                 const timer = setInterval(() => {
                     document.getElementById("timer").innerText = time;
@@ -526,7 +539,7 @@
 
                         })
                     document.getElementById("host_in").style.display = "none";
-                },100000);
+                }, 100000);
 
                 setTimeout(() => {
                     clearInterval(timer);
@@ -545,6 +558,7 @@
 
 
             function play() {
+                
                 hide("block");
                 hide("exp");
 
