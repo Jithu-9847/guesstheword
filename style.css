@@ -436,6 +436,7 @@ left: 15px;
         width: 90%;
         height: 635px;
         left: 5%;
+        
        top: 100%;
        
 
@@ -482,5 +483,7 @@ left: 15px;
         width: 40%;
     }
   }
-
-   
+@media only screen and (max-height: 700px) {
+    #how{
+       top:120%;
+    }   
