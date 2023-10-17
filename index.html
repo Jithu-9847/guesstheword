@@ -6,9 +6,13 @@
         Guess The Word
     </title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Autour+One&family=Croissant+One&family=Oswald:wght@200&family=Teko:wght@300&display=swap" rel="stylesheet">
 </head>
 
-<body background="background_pc.svg">
+<body>
 
     <main>
 
@@ -44,7 +48,7 @@
             <button id="report">
                 REPORT
             </button>
-            <input type="text" name="" id="input">
+            <input type="text" name="" id="input" onkeyup="this.value = this.value.toLowerCase();">
             <div id="block">
 
             </div>
@@ -57,7 +61,9 @@
             <div id="winner">
                 <h1 id="congrats">Congragulations</h1>
                 <img src="winner1.gif" alt="" id="win_gif">
-                <h1 id="winner_name"></h1>
+                <h1 id="winner_name">name</h1>
+                <button id="try">Try Again</button>
+                 
             </div>
         </div>
 
@@ -96,22 +102,22 @@
             let users;
             let check = 0;
             let words = ["apple", "banana", "cat", "cat fish", "dog", "elephant", "fish", "giraffe", "horse ride", "igloo", "jellyfish", "kangaroo", "lion king", "monkey", "AI", "octopus", "ringtone", "calling bell", "rhinoceros", "snake", "tiger fish", "umbrella", "van", "fly wheel", "x-ray machine", "sun set",
-                "zebra", "aeroplane", "bicycle", "bus", "car", "delivery truck", "excavator", "fire engine", "garbage truck", "helicopter", "ice cream truck", "jet ski", "kayak", "locomotive", "motorcycle", "oil tanker", "police car", "quad bike", "racing car", "school bus", "speedboat", "street sweeper", "submarine",
-                "tractor", "unicycle", "van", "water taxi", "wheelbarrow", "yacht", "zeppelin", "apple", "banana", "cherry", "orange", "pear", "strawberry", "watermelon",
-                "baseball", "basketball", "football", "soccer", "tennis", "volleyball",
-                "blue", "green", "orange", "pink", "purple", "red", "yellow",
-                "car", "house", "plane", "ship", "train",
-                "cat", "dog", "elephant", "fish", "giraffe", "hippopotamus", "lion", "monkey", "mouse", "panda", "tiger",
-                "child", "father", "grandfather", "grandmother", "mother",
-                "city", "country", "desert", "forest", "mountain", "ocean", "river", "sea",
-                "cloud", "rain", "snow", "sun", "wind",
-                "day", "night", "morning", "afternoon", "evening",
-                "eat", "drink", "sleep", "walk", "run",
-                "happy", "sad", "angry", "excited", "tired",
-                "big", "small", "long", "short", "tall", "short",
-                "hot", "cold", "wet", "dry",
-                "light", "dark",
-                "up", "down", "left", "right"];
+                    "zebra", "aeroplane", "bicycle", "bus", "car", "delivery truck", "excavator", "fire engine", "garbage truck", "helicopter", "ice cream truck", "jet ski", "kayak", "locomotive", "motorcycle", "oil tanker", "police car", "quad bike", "racing car", "school bus", "speedboat", "street sweeper", "submarine",
+                    "tractor", "unicycle", "van", "water taxi", "wheelbarrow", "yacht", "zeppelin", "apple", "banana", "cherry", "orange", "pear", "strawberry", "watermelon",
+                    "baseball", "basketball", "football", "soccer", "tennis", "volleyball",
+                    "blue", "green", "orange", "pink", "purple", "red", "yellow",
+                    "car", "house", "plane", "ship", "train",
+                    "cat", "dog", "elephant", "fish", "giraffe", "hippopotamus", "lion", "monkey", "mouse", "panda", "tiger",
+                    "child", "father", "grandfather", "grandmother", "mother",
+                    "city", "country", "desert", "forest", "mountain", "ocean", "river", "sea",
+                    "cloud", "rain", "snow", "sun", "wind",
+                    "day", "night", "morning", "afternoon", "evening",
+                    "eat", "drink", "sleep", "walk", "run",
+                    "happy", "sad", "angry", "excited", "tired",
+                    "big", "small", "long", "short", "tall", "short",
+                    "hot", "cold", "wet", "dry",
+                    "light", "dark",
+                    "up", "down", "left", "right"];
 
             let rand;
             // window.addEventListener('offline', updateOnlineStatus);
@@ -136,7 +142,7 @@
 
                     })
 
-
+                  
 
                 document.onvisibilitychange = function () {
                     if (document.visibilityState === 'hidden') {
@@ -157,6 +163,16 @@
             let values;
             var time = 100;
 
+
+
+
+
+            onChildChanged(ref(db, 'correct'), (data) => {
+
+                if(time>10)
+                time=time-10;
+
+            })
 
             // -----------------------add new player-----------------
             document.getElementById('name_btn').addEventListener('click', () => {
@@ -250,6 +266,60 @@
 
             })
 
+
+
+            document.getElementById('input').addEventListener('keydown', (event) => {
+  if (event.keyCode === 13) {
+    if (values == document.getElementById('input').value) {
+                    add = parseInt(document.getElementById('timer').innerText);
+                    player_score = player_score + add;
+                    document.getElementById('input').style.color = "rgb(38, 255, 0)";
+                    display("block");
+                    document.getElementById('exp').setAttribute('src', 'happy.gif');
+                    display("exp");
+
+
+                    set(ref(db, "correct"),
+                    {
+                        name:localStorage.getItem("user")
+
+                    })
+                    set(ref(db, "Users/" + localStorage.getItem('user')),
+                        {
+                            score: player_score
+
+                        }).then(() => {
+
+                            document.getElementById('input').value = "";
+                            document.getElementById('input').style.color = "black";
+
+                        })
+
+
+                    get(child(dbref, 'Users/' + localStorage.getItem('user'))).then((snapshot) => {
+                        user_score = Object.values(snapshot.val());
+                    })
+                }
+                else {
+
+                    document.getElementById('exp').setAttribute('src', 'sad.gif');
+                    display('exp');
+                    document.getElementById('input').style.color = "red";
+                    setTimeout(() => {
+                        document.getElementById('input').style.color = "black";
+                    }, 1000);
+                    setTimeout(() => {
+                        hide("exp");
+                    }, 4000);
+
+                }
+
+  }
+});
+
+
+
+
             // -----------------------------------answer check------------------
             let it;
             let player_score = 0;
@@ -257,7 +327,7 @@
             let user_score;
             document.getElementById('enter_btn').addEventListener('click', () => {
 
-
+                  
                 if (values == document.getElementById('input').value) {
                     add = parseInt(document.getElementById('timer').innerText);
                     player_score = player_score + add;
@@ -267,7 +337,11 @@
                     display("exp");
 
 
+                    set(ref(db, "correct"),
+                    {
+                        name:localStorage.getItem("user")
 
+                    })
                     set(ref(db, "Users/" + localStorage.getItem('user')),
                         {
                             score: player_score
@@ -345,7 +419,7 @@
 
 
 
-                    if (users.length == 3 && rand < users.length) {
+                    if (users.length == 5 && rand < users.length) {
 
                         
                         display("pop_up");
@@ -440,7 +514,7 @@
 
 
 
-                if (rand == 3) {
+                if (rand == 5) {
                     let scores;
                     let one_score;
                     let large = 0;
@@ -479,17 +553,18 @@
 
             onChildChanged(ref(db, 'winner'), (data) => {
                 let winner;
+                
                 get(child(dbref, 'winner')).then((snapshot) => {
                     winner = Object.values(snapshot.val());
                 })
 
+                 
                 setTimeout(() => {
                     document.getElementById('winner_name').innerText = winner[0];
                     display("winner");
-                }, 3000);
+                }, 4000);
 
-
-
+            
             })
 
 
